@@ -18,7 +18,7 @@ const Main = () => {
                     setAdvice(res.data.slip.advice)
                 }
                 else{
-                    var data = JSON.parse(res.data + "}")
+                    var data = JSON.parse(res.data + '}')
                     setAdvice(data.slip.advice)
                 }
             })
@@ -32,7 +32,13 @@ const Main = () => {
         axios.get(url)
             .then(res => {
                 console.log(res)
-                setAdvice(res.data.slip.advice)
+                if(typeof res.data === 'object'){
+                    setAdvice(res.data.slip.advice)
+                }
+                else{
+                    var data = JSON.parse(res.data + '}')
+                    setAdvice(data.slip.advice)
+                }
             })
             .catch(err => {
                 console.log(err)
